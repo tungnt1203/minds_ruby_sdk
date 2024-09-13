@@ -11,6 +11,15 @@ module Minds
         @connection_args = connection_args
         @tables = tables
       end
+
+      def permit_params
+        {
+          type: @type,
+          connection_args: @connection_args,
+          description: @description,
+          tables: @tables
+        }
+      end
     end
 
     class ClickHouse < Base

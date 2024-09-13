@@ -55,7 +55,7 @@ data_source_configs = [
       password: "password",
       database: "mydb"
     }
-  )
+  ).permit_params
 ]
 
 response = client.create_mind(name: name, data_source_configs: data_source_configs)
