@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minds (0.1.0)
+    minds_sdk (0.1.0)
       faraday
 
 GEM
@@ -109,7 +109,7 @@ PLATFORMS
 
 DEPENDENCIES
   faraday
-  minds!
+  minds_sdk!
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)

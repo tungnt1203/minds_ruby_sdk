@@ -1,16 +1,12 @@
 module Minds
-  class Api
+  module Resources
     class Base
-      attr_accessor :api_key, :base_url
+      attr_accessor :api_key, :base_url, :api
 
-      def initialize(base_url:, api_key:)
-        if base_url.nil?
-          base_url = "https://mdb.ai"
-        end
-
-        base_url.gsub(/\/+$/, "")
-        self.base_url = base_url
-        self.api_key = api_key
+      def initialize(client)
+        @base_url = client.base_url
+        @api_key = client.api_key
+        @api = conn
       end
 
       private

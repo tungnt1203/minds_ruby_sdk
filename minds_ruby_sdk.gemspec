@@ -3,22 +3,22 @@
 require_relative "lib/minds/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "minds"
+  spec.name = "minds_sdk"
   spec.version = Minds::VERSION
   spec.authors = [ "tungnt" ]
-  spec.email = [ "tung.nguyen120301@gmail.com" ]
+  spec.email = [ "tungnguyen120301@gmail.com" ]
 
-  spec.summary = "A Ruby gem for interacting with the MindsDB AI platform, enabling data analysis, predictions, and machine learning tasks"
-  spec.description = "A Ruby gem for integrating with MindsDB, providing tools to create, train, and deploy AI models. It facilitates data analysis, predictive modeling, and machine learning tasks using MindsDB's cloud or on-premises solutions."
-  spec.homepage = "https://github.com/tungnt1203/minds"
+  spec.summary = 'Minds Ruby SDK provides an interface to interact with the Minds AI system API. It allows you to create and manage "minds" (artificial intelligences), create chat completions, and manage data sources.'
+  spec.description = "Official Ruby SDK for Minds"
+  spec.homepage = "https://github.com/tungnt1203/minds_ruby_sdk"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/tungnt1203/minds"
-  spec.metadata["changelog_uri"] = "https://github.com/tungnt1203/minds/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/tungnt1203/minds_ruby_sdk"
+  spec.metadata["changelog_uri"] = "https://github.com/tungnt1203/minds_ruby_sdk/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "faraday"
-
+  spec.add_dependency "ruby-openai"
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
