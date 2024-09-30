@@ -1,0 +1,1 @@
+class Error < StandardError; end

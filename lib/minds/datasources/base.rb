@@ -63,5 +63,11 @@ module Minds
         super(description: description, type: :elasticsearch, connection_args: connection_args, tables: tables)
       end
     end
+
+    class Datasources
+      def initalize(client)
+        self.api = client.api
+      end
+    end
   end
 end

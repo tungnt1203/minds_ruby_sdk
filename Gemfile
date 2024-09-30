@@ -4,7 +4,8 @@ source "https://rubygems.org"
 
 # Specify your gem's dependencies in minds.gemspec
 gemspec
-gem 'faraday'
+gem "faraday"
+gem "ruby-openai"
 gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.0"
