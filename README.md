@@ -2,6 +2,7 @@
 
 Minds Ruby SDK provides an interface to interact with the Minds AI system API. It allows you to create and manage "minds" (artificial intelligences), create chat completions, and manage data sources.
 
+[![Gem Version](https://badge.fury.io/rb/minds_sdk.svg)](https://badge.fury.io/rb/minds_sdk)
 ## Installation
 
 Add this line to your application's Gemfile:
