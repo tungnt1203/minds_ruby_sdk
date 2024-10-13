@@ -9,7 +9,7 @@ module Minds
 
       def initialize(client, attributes = {})
         super(client)
-        @project = 'mindsdb'
+        @project = "mindsdb"
         @name = attributes["name"]
         @model_name = attributes["model_name"]
         @provider = attributes["provider"]
