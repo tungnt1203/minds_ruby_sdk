@@ -1,8 +1,10 @@
 # Minds Ruby SDK
+[![Gem Version](https://badge.fury.io/rb/minds_sdk.svg)](https://badge.fury.io/rb/minds_sdk)
 
 Minds Ruby SDK provides an interface to interact with the Minds AI system API. It allows you to create and manage "minds" (artificial intelligences), create chat completions, and manage data sources.
 
-[![Gem Version](https://badge.fury.io/rb/minds_sdk.svg)](https://badge.fury.io/rb/minds_sdk)
+The best starting point is the [Mind Website](https://docs.mdb.ai/docs/data-mind), with its introduction and explanation.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -62,8 +64,10 @@ client = Minds::Client.new("YOUR_API_KEY", "https://mdb.ai")
 # For a self-hosted Minds Cloud instance
 client = Minds::Client.new("YOUR_API_KEY", "https://<custom_cloud>.mdb.ai")
 ```
+> Get your minds api key [here](https://mdb.ai/apiKeys)
 
 ## Resources
+
 ### Creating a Data Source
 
 You can connect to various databases, such as PostgreSQL, by configuring your data source. Use the DatabaseConfig to define the connection details for your data source.
@@ -84,8 +88,9 @@ postgres_config = Minds::Resources::DatabaseConfig.new(
   tables: ['<TABLE-1>', '<TABLE-2>']
 )
 
-See supported [Data Sources](https://docs.mdb.ai/docs/data_sources)
 ```
+
+> See supported [Data Sources](https://docs.mdb.ai/docs/data_sources)
 
 ### Creating a Mind
 
@@ -133,7 +138,7 @@ mind.update(
 You can list all the minds you've created:
 
 ```ruby
-puts client.minds.all
+client.minds.all
 ```
 
 ### Get a Mind by Name
@@ -157,7 +162,7 @@ client.minds.destroy('mind_name')
 To view all data sources:
 
 ```ruby
-puts client.datasources.all
+client.datasources.all
 ```
 
 ### Get a Data Source by Name
@@ -196,11 +201,13 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [here](https://github.com/your_github_username/minds_ruby_sdk).
+Bug reports and pull requests are welcome on GitHub at [here](https://github.com/tungnt1203/minds_ruby_sdk).
 
 ## Acknowledgments
 
-This SDK is built for integration with Minds, AI layer for existing databases. We would like to express our gratitude to the MindsDB team for their innovative work in making AI more accessible.
+This SDK is built for integration with Minds, AI layer for existing databases. See more docs [here](https://docs.mdb.ai/docs/data-mind)
+
+We would like to express our gratitude to the MindsDB team for their innovative work in making AI more accessible.
 For more information about MindsDB, please visit their official website: [https://mindsdb.com/](https://mindsdb.com/)
 ## License
 

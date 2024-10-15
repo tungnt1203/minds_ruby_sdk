@@ -104,22 +104,11 @@ module Minds
       # @return [String, Enumerator] If stream mode is off, returns a String.
       #   If stream mode is on, returns an Enumerator of ChoiceDelta objects (as defined by OpenAI)
       def completion(message:, stream: false)
-        parsed = URI.parse(self.api.base_url)
-        host = parsed.host
-        if host == "mdb.ai"
-          llm_host = "llm.mdb.ai"
-        else
-          llm_host = "ai.#{host}"
-        end
-        parsed.host = llm_host
-        parsed.path = ""
-        parsed.query = nil
-        uri_base = parsed
-        openai_client = OpenAI::Client.new(access_token: self.api_key, uri_base: uri_base)
+        openai_client = OpenAI::Client.new(access_token: self.api_key, uri_base: self.base_url)
         if stream
           openai_client.chat(
             parameters: {
-              model: @model_name,
+              model: @name,
               messages: [ { role: "user", content: message } ], # Required.
               temperature: 0,
               stream: proc do |chunk, _bytesize|
@@ -130,7 +119,7 @@ module Minds
         else
           response = openai_client.chat(
             parameters: {
-              model: @model_name,
+              model: @name,
               messages: [ { role: "user", content: message } ],
               temperature: 0
             }
@@ -150,9 +139,10 @@ module Minds
       #
       # @return [Array<Mind>] An array of Mind objects
       def all
-        resp = self.api.get("/api/projects/#{@project}/minds")
-        resp.body
-        resp.body.map { |item| Mind.new(self, item) }
+        data = self.api.get("/api/projects/#{@project}/minds").body
+        return [] if data.empty?
+
+        data.map { |item| Mind.new(self, item) }
       end
 
       # Get a mind by name
@@ -213,9 +203,8 @@ module Minds
             parameters: parameters,
             datasources: ds_names
           }.to_json
-
-          find(name)
         end
+        find(name)
       end
 
       def check_datasource(ds)
@@ -237,6 +226,7 @@ module Minds
 
       def create_datasource_if_needed(ds)
         return unless ds.is_a?(DatabaseConfig)
+
         datasources = Datasources.new(self)
         datasources.find(ds.name)
       rescue Faraday::ResourceNotFound
