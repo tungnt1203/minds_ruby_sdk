@@ -24,6 +24,11 @@ Or install it yourself as:
 ```bash
 $ gem install minds_sdk
 ```
+and require with:
+
+```ruby
+require 'minds'
+```
 
 ## Getting Started
 
