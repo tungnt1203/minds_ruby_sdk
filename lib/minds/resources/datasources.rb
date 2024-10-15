@@ -61,6 +61,7 @@ module Minds
         data = self.api.get("/api/datasources").body
         data.each_with_object([]) do |item, ds_list|
           next if item["engine"].nil?
+
           ds_list << Datasource.new(**item.transform_keys(&:to_sym))
         end
       end
@@ -71,7 +72,7 @@ module Minds
       # @return [Datasource] The found datasource object
       # @raise [ObjectNotSupported] If the datasource type is not supported
       def find(name)
-        data =self.api.get("api/datasources/#{name}").body
+        data = self.api.get("api/datasources/#{name}").body
 
         if data["engine"].nil?
           raise ObjectNotSupported, "Wrong type of datasource: #{name}"
