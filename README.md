@@ -47,7 +47,7 @@ end
 Alternatively, you can configure each client instance individually:
 
 ```ruby
-client = Minds::Client.new("YOUR_API_KEY", "https://mdb.ai")
+client = Minds::Client.new(api_key: "YOUR_API_KEY", base_url: "https://mdb.ai")
 ```
 
 ### Initialize the Client
@@ -59,10 +59,10 @@ After configuration, you can initialize the client:
 client = Minds::Client.new
 
 # Or with instance-specific configuration
-client = Minds::Client.new("YOUR_API_KEY", "https://mdb.ai")
+client = Minds::Client.new(api_key: "YOUR_API_KEY", base_url: "https://mdb.ai")
 
 # For a self-hosted Minds Cloud instance
-client = Minds::Client.new("YOUR_API_KEY", "https://<custom_cloud>.mdb.ai")
+client = Minds::Client.new(api_key: "YOUR_API_KEY", base_url: "https://<custom_cloud>.mdb.ai")
 ```
 > Get your minds api key [here](https://mdb.ai/apiKeys)
 
