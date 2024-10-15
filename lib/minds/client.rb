@@ -18,16 +18,10 @@ module Minds
     end
 
     attr_accessor :base_url, :api_key
-    DEFAULT_HOST = "https://mdb.ai"
 
-    def initialize(api_key = nil, base_url = nil)
+    def initialize(api_key: nil, base_url: nil)
       # if api_key & base_url not present. Fall back to global config
-      @base_url =
-        if base_url.nil?
-          Minds::Client.config.send(:base_url).nil? ? DEFAULT_HOST : Minds::Client.config.send(:base_url)
-        else
-          base_url
-        end
+      @base_url = base_url.nil? ? Minds::Client.config.send(:base_url) : base_url
       @api_key = api_key.nil? ? Minds::Client.config.send(:api_key) : api_key
     end
 

@@ -18,7 +18,7 @@ RSpec.describe Minds do
 
     it "uses default base URL if not provided" do
       client = Minds::Client.new("test_api_key")
-      expect(client.base_url).to eq(Minds::Client::DEFAULT_HOST)
+      expect(client.base_url).to eq(Minds::Config::Base::DEFAULT_BASE_URL)
     end
 
     it "allows setting a custom base URL" do
