@@ -197,7 +197,12 @@ response = mind.completion(message: "Hello, how are you?")
 puts response
 
 # For streaming responses
-mind.completion(message: "Tell me a story", stream: true)
+mind.completion(message: "Tell me a story", stream: true) do |chunk|
+  puts chunk
+end
+
+# => {"id"=>"ad2592865b844aadbb070b3fb5090869", "choices"=>[{"delta"=>{"content"=>"I understand your request. I'm working on a detailed response for you.", "function_call"=>nil, "role"=>"assistant", "tool_calls"=>nil}, "finish_reason"=>nil, "index"=>0, "logprobs"=>nil}], "created"=>1729085931, "model"=>"mind_house_sale", "object"=>"chat.completion.chunk", "system_fingerprint"=>nil, "usage"=>nil}
+# => ...
 ```
 
 ## Development
