@@ -1,5 +1,6 @@
 require "openai"
 require "uri"
+
 module Minds
   module Resources
     DEFAULT_PROMPT_TEMPLATE = "Use your database tools to answer the user's question: {{question}}"
@@ -47,7 +48,7 @@ module Minds
         data["name"] = name if name
         data["model_name"] = model_name if model_name
         data["provider"] = provider if provider
-        data["parameters"] = parameters.nil? ? {} :  parameters
+        data["parameters"] = parameters.nil? ? {} : parameters
         data["parameters"]["prompt_template"] = prompt_template if prompt_template
 
         self.api.patch("/api/projects/#{@project}/minds/#{@name}") do |req|
@@ -105,25 +106,22 @@ module Minds
       #   If stream mode is on, returns an Enumerator of ChoiceDelta objects (as defined by OpenAI)
       def completion(message:, stream: false)
         openai_client = OpenAI::Client.new(access_token: self.api_key, uri_base: self.base_url)
+        params = {
+          model: @name,
+          messages: [ { role: "user", content: message } ],
+          temperature: 0
+        }
+
         if stream
           openai_client.chat(
-            parameters: {
-              model: @name,
-              messages: [ { role: "user", content: message } ], # Required.
-              temperature: 0,
+            parameters: params.merge(
               stream: proc do |chunk, _bytesize|
-                print chunk.dig("choices", 0, "delta")
+                yield chunk if block_given?
               end
-            }
+            )
           )
         else
-          response = openai_client.chat(
-            parameters: {
-              model: @name,
-              messages: [ { role: "user", content: message } ],
-              temperature: 0
-            }
-          )
+          response = openai_client.chat(parameters: params)
           response.dig("choices", 0, "message", "content")
         end
       end
@@ -152,6 +150,10 @@ module Minds
       def find(name)
         resp = self.api.get("/api/projects/#{@project}/minds/#{name}")
         Mind.new(self, resp.body)
+      rescue Faraday::ResourceNotFound => e
+        e.response
+      rescue Faraday::UnauthorizedError => e
+        e.response
       end
 
       # Drop (delete) a mind by name
@@ -160,6 +162,10 @@ module Minds
       # @return [void]
       def destroy(name)
         self.api.delete("/api/projects/#{@project}/minds/#{name}")
+      rescue Faraday::ResourceNotFound => e
+        e.response
+      rescue Faraday::UnauthorizedError => e
+        e.response
       end
 
       # Create a new mind and return it
@@ -176,12 +182,11 @@ module Minds
       # @param parameters [Hash, nil] Other parameters of the mind (optional)
       # @param replace [Boolean] If true, remove existing mind with the same name (default: false)
       # @return [Mind] The created mind object
-      def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources:  nil, parameters: nil, replace: false)
+      def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil, replace: false)
         if replace
           begin
             find(name)
             destroy(name)
-          rescue Faraday::ResourceNotFound
           end
         end
 

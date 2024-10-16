@@ -44,8 +44,6 @@ module Minds
           begin
             find(name)
             destroy(name)
-          rescue ObjectNotFound
-            # Do nothing
           end
         end
         self.api.post("/api/datasources") do |req|
@@ -59,6 +57,8 @@ module Minds
       # @return [Array<Datasource>] An array of Datasource objects
       def all
         data = self.api.get("/api/datasources").body
+        return [] if data.empty?
+
         data.each_with_object([]) do |item, ds_list|
           next if item["engine"].nil?
 
@@ -79,6 +79,10 @@ module Minds
         end
 
         Datasource.new(**data.transform_keys(&:to_sym))
+      rescue Faraday::ResourceNotFound => e
+        e.response
+      rescue Faraday::UnauthorizedError => e
+        e.response
       end
 
       # Drop (delete) a datasource by name
@@ -89,7 +93,11 @@ module Minds
       # @raise [Faraday::ClientError] If there's a client-side error
       # @raise [Faraday::ServerError] If there's a server-side error
       def destroy(name)
-       self.api.delete("api/datasources/#{name}")
+        self.api.delete("api/datasources/#{name}")
+      rescue Faraday::ResourceNotFound => e
+        e.response
+      rescue Faraday::UnauthorizedError => e
+        e.response
       end
     end
   end
