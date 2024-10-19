@@ -21,8 +21,8 @@ module Minds
 
     def initialize(api_key: nil, base_url: nil)
       # if api_key & base_url not present. Fall back to global config
-      @base_url = base_url.nil? ? Minds::Client.config.send(:base_url) : base_url
-      @api_key = api_key.nil? ? Minds::Client.config.send(:api_key) : api_key
+      @base_url = base_url ||  Minds::Client.config.send(:base_url)
+      @api_key = api_key ||  Minds::Client.config.send(:api_key)
     end
 
     def datasources
