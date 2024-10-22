@@ -18,6 +18,7 @@ module Minds
     end
 
     attr_accessor :base_url, :api_key
+    SENSITIVE_ATTRIBUTES = %i[@api_key].freeze
 
     def initialize(api_key: nil, base_url: nil)
       # if api_key & base_url not present. Fall back to global config
