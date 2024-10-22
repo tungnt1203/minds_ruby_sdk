@@ -32,5 +32,15 @@ module Minds
     def minds
       @minds ||= Minds::Resources::Minds.new(self)
     end
+
+    def inspect
+      vars = instance_variables.map do |var|
+        value = instance_variable_get(var)
+
+        SENSITIVE_ATTRIBUTES.include?(var) ? "#{var}=[FILTERED]" : "#{var}=#{value.inspect}"
+      end
+
+      "#<#{self.class}:0x#{object_id.to_s(16)} #{vars.join(', ')}>"
+    end
   end
 end
