@@ -23,14 +23,16 @@ module Minds
     private
 
     def conn
-      Faraday.new(url: @base_url) do |builder|
+      connection = Faraday.new(url: @base_url) do |builder|
+        builder.use MiddlewareErrors if @log_errors
+        builder.headers["Authorization"] = "Bearer #{@api_key}"
+        builder.headers["Content-Type"] = "application/json"
         builder.request :json
         builder.response :json
         builder.response :raise_error
-        builder.adapter Faraday.default_adapter
-        builder.headers["Authorization"] = "Bearer #{@api_key}"
-        builder.headers["Content-Type"] = "application/json"
       end
+
+      connection
     end
   end
 end

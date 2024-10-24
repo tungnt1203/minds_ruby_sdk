@@ -71,6 +71,20 @@ client = Minds::Client.new(api_key: "YOUR_API_KEY", base_url: "https://<custom_c
 ```
 > Get your minds api key [here](https://mdb.ai/apiKeys)
 
+### Logging
+
+By default, the Minds SDK does not log any Faraday::Errors encountered during network requests to prevent potential data leaks. To enable error logging, you can set `log_errors` to true when configuring the client:
+
+```ruby
+# Global configuration
+Minds::Client.configure do |config|
+  config.log_errors = true
+end
+
+# Or instance configuration
+client = Minds::Client.new(log_errors: true)
+```
+
 ## Resources
 
 ### Creating a Data Source
