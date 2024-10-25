@@ -1,23 +1,23 @@
 module Minds
   module RestClient
     def get(path:)
-      conn.get(uri(path:))&.body
+      conn.get(uri(path: path))&.body
     end
 
     def post(path:, parameters:)
-      conn.post(uri(path:)) do |req|
+      conn.post(uri(path: path)) do |req|
         req.body = parameters.to_json
       end&.body
     end
 
     def patch(path:, parameters:)
-      conn.patch(uri(path:)) do |req|
+      conn.patch(uri(path: path)) do |req|
         req.body = parameters.to_json
       end&.body
     end
 
     def delete(path:)
-      conn.delete(uri(path:))&.body
+      conn.delete(uri(path: path))&.body
     end
 
     private
@@ -29,7 +29,7 @@ module Minds
     end
 
     def conn
-      connection = Faraday.new(url: @base_url) do |builder|
+      Faraday.new(url: @base_url) do |builder|
         builder.use MiddlewareErrors if @log_errors
         builder.headers["Authorization"] = "Bearer #{@api_key}"
         builder.headers["Content-Type"] = "application/json"
@@ -37,8 +37,6 @@ module Minds
         builder.response :json
         builder.response :raise_error
       end
-
-      connection
     end
   end
 end

@@ -47,7 +47,7 @@ module Minds
           destroy(name)
         end
       end
-      @client.post(path: "datasources", parameters: ds_config.to_h.to_json)
+      @client.post(path: "datasources", parameters: ds_config.to_h)
       find(name)
     end
 

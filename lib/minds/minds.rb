@@ -49,7 +49,7 @@ module Minds
       data["parameters"] = parameters.nil? ? {} : parameters
       data["parameters"]["prompt_template"] = prompt_template if prompt_template
 
-      @client.patch(path: "projects/#{@project}/minds/#{@name}", parameters: data.to_json)
+      @client.patch(path: "projects/#{@project}/minds/#{@name}", parameters: data)
 
       @name = name if name && name != @name
     end
@@ -64,7 +64,7 @@ module Minds
     # @return [void]
     def add_datasources(datasource)
       ds_name = @client.minds.check_datasource(datasource)
-      data = { name: ds_name }.to_json
+      data = { name: ds_name }
       @client.post(path: "projects/#{@project}/minds/#{@name}/datasources", parameters: data)
 
       mind = @client.minds.find(@name)
@@ -190,7 +190,7 @@ module Minds
         provider: provider,
         parameters: parameters,
         datasources: ds_names
-      }.to_json
+      }
 
       @client.post(path: "api/projects/#{@project}/minds", parameters: data)
       find(name)
