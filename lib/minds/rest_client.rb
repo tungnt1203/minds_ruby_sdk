@@ -1,26 +1,32 @@
 module Minds
   module RestClient
     def get(path:, parameters: nil)
-      conn.get(path, parameters)
+      conn.get(uri(path:), parameters)&.body
     end
 
     def post(path:, parameters: nil)
-      conn.post(path) do |req|
+      conn.post(uri(path:)) do |req|
         req.body = parameters
-      end
+      end&.body
     end
 
     def patch(path:, parameters: nil)
-      conn.patch(path) do |req|
+      conn.patch(uri(path:)) do |req|
         req.body = parameters
-      end
+      end&.body
     end
 
     def delete(path:)
-      conn.delete(path)
+      conn.delete(uri(path:))&.body
     end
 
     private
+
+    def uri(path:)
+      return path if @base_url.include?(@api_version)
+
+      "/#{@api_version}/#{path}"
+    end
 
     def conn
       connection = Faraday.new(url: @base_url) do |builder|

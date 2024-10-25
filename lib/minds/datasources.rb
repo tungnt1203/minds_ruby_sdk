@@ -47,7 +47,7 @@ module Minds
           destroy(name)
         end
       end
-      @client.post(path: "/api/datasources", parameters: ds_config.to_h.to_json)
+      @client.post(path: "datasources", parameters: ds_config.to_h.to_json)
       find(name)
     end
 
@@ -55,7 +55,7 @@ module Minds
     #
     # @return [Array<Datasource>] An array of Datasource objects
     def all
-      data = @client.get(path: "/api/datasources").body
+      data = @client.get(path: "datasources")
       return [] if data.empty?
 
       data.each_with_object([]) do |item, ds_list|
@@ -71,7 +71,7 @@ module Minds
     # @return [Datasource] The found datasource object
     # @raise [ObjectNotSupported] If the datasource type is not supported
     def find(name)
-      data = @client.get(path: "api/datasources/#{name}").body
+      data = @client.get(path: "datasources/#{name}")
       if data["engine"].nil?
         raise ObjectNotSupported, "Wrong type of datasource: #{name}"
       end
@@ -83,7 +83,7 @@ module Minds
     # @param name [String] The name of the datasource to delete
     # @return [void]
     def destroy(name)
-      @client.delete(path: "api/datasources/#{name}")
+      @client.delete(path: "datasources/#{name}")
     end
   end
 end

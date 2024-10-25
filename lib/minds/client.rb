@@ -3,7 +3,7 @@ module Minds
     include Minds::RestClient
 
     SENSITIVE_ATTRIBUTES = %i[@api_key].freeze
-    CONFIG_KEYS = %i[base_url api_key log_errors].freeze
+    CONFIG_KEYS = %i[base_url api_key log_errors api_version].freeze
     attr_reader(*CONFIG_KEYS)
 
     def initialize(options = {})
