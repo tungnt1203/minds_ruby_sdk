@@ -1,18 +1,18 @@
 module Minds
   module RestClient
-    def get(path:, parameters: nil)
-      conn.get(uri(path:), parameters)&.body
+    def get(path:)
+      conn.get(uri(path:))&.body
     end
 
-    def post(path:, parameters: nil)
+    def post(path:, parameters:)
       conn.post(uri(path:)) do |req|
-        req.body = parameters
+        req.body = parameters.to_json
       end&.body
     end
 
-    def patch(path:, parameters: nil)
+    def patch(path:, parameters:)
       conn.patch(uri(path:)) do |req|
-        req.body = parameters
+        req.body = parameters.to_json
       end&.body
     end
 
