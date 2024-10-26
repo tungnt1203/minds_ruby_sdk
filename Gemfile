@@ -11,7 +11,7 @@ gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 gem "vcr", "~> 6.3", ">= 6.3.1"
 gem "webmock", "~> 3.24"
-gem 'dotenv', '~> 3.1', '>= 3.1.4'
+gem "dotenv", "~> 3.1", ">= 3.1.4"
 
 gem "rubocop", "~> 1.21"
 
