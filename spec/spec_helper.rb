@@ -3,11 +3,13 @@
 require "minds"
 require "vcr"
 require "webmock/rspec"
+require "dotenv/load"
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
-  config.filter_sensitive_data("<API_KEY>") { ENV["MINDS_API_KEY"] || "api_key" }
+  config.configure_rspec_metadata!
+  config.filter_sensitive_data("<API_KEY>") { ENV.fetch("MINDS_API_KEY") }
   config.filter_sensitive_data("<BASE_URL>") { Minds::Config::Base::DEFAULT_BASE_URL }
   config.allow_http_connections_when_no_cassette = true
 end

@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<BASE_URL>/api/datasources"
+    body:
+      encoding: UTF-8
+      string: '{"name":"my_datasource","engine":"postgres","description":"<DESCRIPTION-OF-YOUR-DATA>","connection_data":{"user":"demo_user","password":"demo_password","host":"samples.mindsdb.com","port":5432,"database":"demo","schema":"demo_data"},"tables":["<TABLE-1>","<TABLE-2>"]}'
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:20:45 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729963246.585.2175.758341|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Mon,
+        28-Oct-24 17:20:45 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=wbb9jqQazwZyTJmfCaw3ya7xMeb%2FVmE%2FdQnfkBxXMEXZzzd0B%2FK0p%2BmDrZJBMdtVtJQ0EyFP2dZGBYtURcEdhOTRFCpVPJMZMpIp%2BWlRI7qkCuweEgLRoQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c1e6659353faa-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Sat, 26 Oct 2024 17:20:45 GMT
+- request:
+    method: get
+    uri: "<BASE_URL>/api/datasources/my_datasource"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:20:47 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729963247.98.2182.454811|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Mon,
+        28-Oct-24 17:20:46 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=DckmZzd7%2B4FXsOPxWfVyYLKOgxOO36eQw7Pr28W7Ts1IMrsihR3DKsCZXiXXJh6wzTdqx%2FK%2F5ugKBcbJxHgGRhBxlICdmW3oZ7pWacn3CmK%2BkXlYVdkkrQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c1e6ffb9d3d77-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "connection_data": {
+            "database": "demo",
+            "host": "samples.mindsdb.com",
+            "password": "demo_password",
+            "port": 5432,
+            "schema": "demo_data",
+            "user": "demo_user"
+          },
+          "created_at": "2024-10-26 17:20:45.798512",
+          "description": "<DESCRIPTION-OF-YOUR-DATA>",
+          "engine": "postgres",
+          "name": "my_datasource",
+          "tables": [
+            "<TABLE-1>",
+            "<TABLE-2>"
+          ]
+        }
+  recorded_at: Sat, 26 Oct 2024 17:20:47 GMT
+recorded_with: VCR 6.3.1

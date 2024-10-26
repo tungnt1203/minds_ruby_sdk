@@ -1,0 +1,117 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<BASE_URL>/api/projects/mindsdb/minds"
+    body:
+      encoding: UTF-8
+      string: '{"name":"test_mind","model_name":null,"provider":null,"parameters":{"prompt_template":"Use
+        your database tools to answer the user''s question: {{question}}"},"datasources":[]}'
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:40:58 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729964459.408.2178.575371|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Mon,
+        28-Oct-24 17:40:58 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=jH8bM64Uac3ImugOf%2FhLTL%2Bw6HmZpaO4RzbxIXb3N26P3k64jrqzAco55mUqgyAFwJ87x3eqQpwMWbSV%2FaajVcOOS3u%2BcuflYH4EyS9wC7UtM9CyzntXcg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c3c028c499c44-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Sat, 26 Oct 2024 17:40:58 GMT
+- request:
+    method: get
+    uri: "<BASE_URL>/api/projects/mindsdb/minds/test_mind"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:40:59 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729964460.607.2972.570948|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Mon,
+        28-Oct-24 17:40:59 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=6AHCUKr68d7hcwpWb4h0xG4BHr3UhQwZdbx5G33MmLFE%2FPDyFFJCYrLVAhOGDg8%2B6P%2FwDxZunl%2FewXXakaprN5H0BOgSCfAKeNewbnnixAxaga2N4RahAw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c3c0b198fce3a-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "created_at": "2024-10-26 17:40:58.448649",
+          "datasources": [],
+          "model_name": "gpt-4o",
+          "name": "test_mind",
+          "parameters": {
+            "prompt_template": "Use your database tools to answer the user's question: {{question}}"
+          },
+          "provider": "openai",
+          "updated_at": "2024-10-26 17:40:58.448647"
+        }
+  recorded_at: Sat, 26 Oct 2024 17:40:59 GMT
+recorded_with: VCR 6.3.1

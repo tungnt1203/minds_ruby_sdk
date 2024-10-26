@@ -92,7 +92,7 @@ client = Minds::Client.new(log_errors: true)
 You can connect to various databases, such as PostgreSQL, by configuring your data source. Use the DatabaseConfig to define the connection details for your data source.
 
 ```ruby
-postgres_config = Minds::Resources::DatabaseConfig.new(
+postgres_config = Minds::DatabaseConfig.new(
   name: 'my_datasource',
   description: '<DESCRIPTION-OF-YOUR-DATA>',
   engine: 'postgres',

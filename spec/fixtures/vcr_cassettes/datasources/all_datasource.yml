@@ -1,0 +1,380 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: "<BASE_URL>/api/datasources"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:22:26 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729963346.962.2972.497593|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Mon,
+        28-Oct-24 17:22:25 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=psydoJt0eKWJUTqv1SuZWu2t8WRYt2yr%2B53qAQbBmX%2BHrvA9MTuZeodt7u95PDI%2Bwm%2FPcU6RMH3HwhsAbufwPQyApLu6VihND2oFxu%2FsaD1Qv6OA8G91HQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c20dab8c0ce4e-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        [
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-10-11 17:29:35.131488",
+            "description": "House sales data",
+            "engine": "postgres",
+            "name": "datasource_name",
+            "tables": []
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "integrations_name": "test_recommend",
+              "password": "demo_password",
+              "port": 5432,
+              "publish": true,
+              "schema": "public",
+              "test": true,
+              "type": "postgres",
+              "user": "demo_user"
+            },
+            "created_at": "2024-10-21 03:11:31.038480",
+            "description": "data job",
+            "engine": "postgres",
+            "name": "test_recommend",
+            "tables": [
+              "models_1",
+              "newstable",
+              "newtable",
+              "predictions_blackbox",
+              "predictions_table",
+              "regression100",
+              "regression_mindsdb",
+              "nodes",
+              "regression_output",
+              "policy",
+              "airline_passenger_satisfaction",
+              "FINAL_BUY_PREDICTION",
+              "FINAL_STOCK_ACTION",
+              "accs",
+              "alembic_version",
+              "amazon_reviews_with_sentiments",
+              "chats",
+              "bank_statement",
+              "demo_data.home_rentals",
+              "fired",
+              "homesale",
+              "conversations",
+              "live_news",
+              "house_sales",
+              "rentals_2024-02-02 21:38:18",
+              "rentals_2024-02-24 16:28:28",
+              "rentals_2024-02-24 16:57:33",
+              "rentals_history_test",
+              "rentals_{{START_DATETIME}}",
+              "stock_test",
+              "sales_data",
+              "stock_lives",
+              "stocks",
+              "stockusers",
+              "subjects",
+              "roadmaps",
+              "t3",
+              "table1",
+              "tesla_sales",
+              "utenti",
+              "viaggi",
+              "users",
+              "bank_customer_transactions",
+              "pomodoro_sessions",
+              "gdp_test",
+              "Olympics 2024",
+              "olympics",
+              "companies",
+              "company_industries",
+              "jobs"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": 5432,
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-10-26 17:20:45.798512",
+            "description": "<DESCRIPTION-OF-YOUR-DATA>",
+            "engine": "postgres",
+            "name": "my_datasource",
+            "tables": [
+              "<TABLE-1>",
+              "<TABLE-2>"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "House Sales",
+            "engine": "postgres",
+            "name": "house_sales_db_mind_20240820033107_datasource_ac5c443f6c1f436fb33667e9d5a98015_sql_skill_76a215ce-c9ff-46fc-bd47-54bcbee588d0",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "House Sales",
+            "engine": "postgres",
+            "name": "house_sales_db_mind_20240820132130_datasource_fe18513e697745389bf716d1e2e85314_sql_skill_e8934703-7ed8-41bb-98ea-a6f23a4ff516",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "House Sales",
+            "engine": "postgres",
+            "name": "house_sales_db_mind_20240820132143_datasource_ee5325c0d5c04f3cbd6d1c6918ecce65_sql_skill_dfae59a8-243b-42be-b8a4-084066531c01",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "House Sales",
+            "engine": "postgres",
+            "name": "house_sales_db_mind_20240820132458_datasource_db804d207da642d4a1823f41447c88b8_sql_skill_2064aa76-5b8e-4d06-a7d0-6e543c49f96c",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "public",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "olympics 2024",
+            "engine": "postgres",
+            "name": "olympics_202420240820144425_datasource_2b09ed7d03334f60b4ab5ed9b440e196_sql_skill_13406a7e-dfa2-4c1a-9cdd-3ecac8d1f886",
+            "tables": [
+              "olympics"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "public",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "olympics 2024",
+            "engine": "postgres",
+            "name": "olympics_202420240820144704_datasource_47cf80387b46460ab7d8dd84298f8b24_sql_skill_1eed8870-2a6b-4b58-8b36-d7f5395d2e42",
+            "tables": [
+              "olympics"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "public",
+              "user": "demo_user"
+            },
+            "created_at": null,
+            "description": "olympics 2024",
+            "engine": "postgres",
+            "name": "olympics_minds_datasource_c3d7e773475b4a24a72ecd67d4dc1ec1_sql_skill_dbf20e93-5690-476b-9a08-9c0c2e5811d2",
+            "tables": [
+              "olympics"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "public",
+              "user": "demo_user"
+            },
+            "created_at": "2024-08-21 06:26:13.065855",
+            "description": "Companies Data",
+            "engine": "postgres",
+            "name": "companies_mind_datasource_8f745e1615954e2e98c4be02fa09b91e_sql_skill_0223a62d-6d4f-4d0f-8ee0-5dd10f7ea8c8",
+            "tables": [
+              "companies",
+              "company_industries"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "public",
+              "user": "demo_user"
+            },
+            "created_at": "2024-09-06 10:00:26.157702",
+            "description": "Companies Data",
+            "engine": "postgres",
+            "name": "companies_mind_datasource_721f0596d55f40d68eba5a1194989531_sql_skill_98f918f0-f0af-4b80-b4bc-7dceb1c854d2",
+            "tables": [
+              "companies",
+              "company_industries"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-09-10 08:32:30.800172",
+            "description": "house sales",
+            "engine": "postgres",
+            "name": "test123_datasource_204da485b3cf4ce0875d0f1c881a90a4_sql_skill_b4d38a67-9562-4a46-a849-1d587f75d24a",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": "5432",
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-09-13 07:50:14.704975",
+            "description": "house sales",
+            "engine": "postgres",
+            "name": "my mind_datasource_bbd1d07358e14683925000076dc535f1_sql_skill_86ba47e0-bdd8-4c01-b1fb-7fcd1bcf2179",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": 5432,
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-09-13 07:56:24.969951",
+            "description": "Main database",
+            "engine": "postgres",
+            "name": "test_mind_datasource_6c31c5ef82f7437c89f0f3e3ed0be0c8_sql_skill_a6023ac1-5ec6-42f8-af30-5dbf734cbf4c",
+            "tables": [
+              "house_sales"
+            ]
+          },
+          {
+            "connection_data": {
+              "database": "demo",
+              "host": "samples.mindsdb.com",
+              "password": "demo_password",
+              "port": 5432,
+              "schema": "demo_data",
+              "user": "demo_user"
+            },
+            "created_at": "2024-10-07 08:58:08.878075",
+            "description": "Main application database",
+            "engine": "postgres",
+            "name": "dropdb",
+            "tables": null
+          }
+        ]
+  recorded_at: Sat, 26 Oct 2024 17:22:26 GMT
+recorded_with: VCR 6.3.1

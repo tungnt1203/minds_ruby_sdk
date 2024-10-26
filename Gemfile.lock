@@ -29,6 +29,7 @@ GEM
       bigdecimal
       rexml
     diff-lcs (1.5.1)
+    dotenv (3.1.4)
     drb (2.2.1)
     event_stream_parser (1.0.0)
     faraday (2.12.0)
@@ -123,6 +124,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  dotenv (~> 3.1, >= 3.1.4)
   faraday (~> 2.12)
   minds_sdk!
   rake (~> 13.0)

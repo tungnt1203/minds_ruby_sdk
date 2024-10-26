@@ -192,7 +192,7 @@ module Minds
         datasources: ds_names
       }
 
-      @client.post(path: "api/projects/#{@project}/minds", parameters: data)
+      @client.post(path: "projects/#{@project}/minds", parameters: data)
       find(name)
     end
 
