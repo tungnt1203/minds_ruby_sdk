@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<BASE_URL>/v1/chat/completions"
+    body:
+      encoding: UTF-8
+      string: '{"model":"test_recommend","messages":[{"role":"user","content":"What
+        is Mind"}],"temperature":0}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 26 Oct 2024 17:43:12 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1729964591.415.2972.695640|03ad488504fbf9bd40778ecdfa18fd41; Expires=Mon,
+        28-Oct-24 17:43:10 GMT; Max-Age=172800; Path=/; HttpOnly
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UWnPFm4eudDU4OaU3t5E3w8EUfP3qTLnWLOwXVFgHjPGiTHsXUw93ZXUMCQfKpRYP1f7xptAZj%2Bncx%2FKwmnFkMBqVdQ4uPY%2Fza0zSkqHivyDs5gJ9KmHaA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d8c3f413bf1ce0e-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"test_recommend-1729964592","choices":[{"finish_reason":"stop","index":0,"logprobs":null,"message":{"content":"To
+        answer your question about \"Mind,\" it seems like you might be referring
+        to MindsDB, which is a tool mentioned in the context of the database tools
+        I have access to. MindsDB is an open-source machine learning platform that
+        allows developers to integrate machine learning models into their applications
+        easily. It is designed to work with databases and provides a way to make predictions
+        using SQL queries.\n\nIf you have a specific question about MindsDB or need
+        information on how it works, feel free to ask!","role":"assistant","function_call":null,"tool_calls":null}}],"created":1729964592,"model":"test_recommend","object":"chat.completion","system_fingerprint":null,"usage":{"completion_tokens":0,"prompt_tokens":0,"total_tokens":0}}'
+  recorded_at: Sat, 26 Oct 2024 17:43:12 GMT
+recorded_with: VCR 6.3.1

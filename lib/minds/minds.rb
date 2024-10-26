@@ -49,7 +49,7 @@ module Minds
       data["parameters"] = parameters.nil? ? {} : parameters
       data["parameters"]["prompt_template"] = prompt_template if prompt_template
 
-      @client.patch(path: "/api/projects/#{@project}/minds/#{@name}", parameters: data.to_json)
+      @client.patch(path: "projects/#{@project}/minds/#{@name}", parameters: data)
 
       @name = name if name && name != @name
     end
@@ -64,8 +64,8 @@ module Minds
     # @return [void]
     def add_datasources(datasource)
       ds_name = @client.minds.check_datasource(datasource)
-      data = { name: ds_name }.to_json
-      @client.post(path: "/api/projects/#{@project}/minds/#{@name}/datasources", parameters: data)
+      data = { name: ds_name }
+      @client.post(path: "projects/#{@project}/minds/#{@name}/datasources", parameters: data)
 
       mind = @client.minds.find(@name)
       @datasources = mind.datasources
@@ -84,7 +84,7 @@ module Minds
       elsif !datasource.is_a?(String)
         raise ArgumentError, "Unknown type of datasource: #{datasource}"
       end
-      @client.delete(path: "/api/projects/#{@project}/minds/#{@name}/datasources/#{datasource}")
+      @client.delete(path: "projects/#{@project}/minds/#{@name}/datasources/#{datasource}")
 
       mind = @client.minds.find(@name)
       @datasources = mind.datasources
@@ -129,7 +129,7 @@ module Minds
     #
     # @return [Array<Mind>] An array of Mind objects
     def all
-      data = @client.get(path: "/api/projects/#{@project}/minds").body
+      data = @client.get(path: "projects/#{@project}/minds")
       return [] if data.empty?
 
       data.map { |item| Mind.new(@client, item) }
@@ -140,8 +140,8 @@ module Minds
     # @param name [String] The name of the mind to find
     # @return [Mind] The found mind object
     def find(name)
-      resp = @client.get(path: "/api/projects/#{@project}/minds/#{name}")
-      Mind.new(@client, resp.body)
+      data = @client.get(path: "projects/#{@project}/minds/#{name}")
+      Mind.new(@client, data)
     end
 
     # Drop (delete) a mind by name
@@ -149,7 +149,7 @@ module Minds
     # @param name [String] The name of the mind to delete
     # @return [void]
     def destroy(name)
-      @client.delete(path: "/api/projects/#{@project}/minds/#{name}")
+      @client.delete(path: "projects/#{@project}/minds/#{name}")
     end
 
     # Create a new mind and return it
@@ -190,9 +190,9 @@ module Minds
         provider: provider,
         parameters: parameters,
         datasources: ds_names
-      }.to_json
+      }
 
-      @client.post(path: "api/projects/#{@project}/minds", parameters: data)
+      @client.post(path: "projects/#{@project}/minds", parameters: data)
       find(name)
     end
 

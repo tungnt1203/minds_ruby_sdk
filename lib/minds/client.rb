@@ -3,13 +3,14 @@ module Minds
     include Minds::RestClient
 
     SENSITIVE_ATTRIBUTES = %i[@api_key].freeze
+    CONFIG_KEYS = %i[base_url api_key log_errors api_version].freeze
+    attr_reader(*CONFIG_KEYS)
 
-    attr_accessor :base_url, :api_key
-
-    def initialize(api_key: nil, base_url: nil)
-      # if api_key & base_url not present. Fall back to global config
-      @base_url = base_url || Client.config.send(:base_url)
-      @api_key = api_key || Client.config.send(:api_key)
+    def initialize(options = {})
+      # if key not present. Fall back to global config
+      CONFIG_KEYS.each do |key|
+        instance_variable_set "@#{key}", options[key] || Client.config.send(key)
+      end
     end
 
     class << self
