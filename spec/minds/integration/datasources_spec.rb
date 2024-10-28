@@ -41,4 +41,13 @@ RSpec.describe "Datasources Integration", :vcr do
       end
     end
   end
+
+  describe "#destroy" do
+    it "delete datasources" do
+      VCR.use_cassette("datasources/destroy_datasource") do
+        result = datasources.destroy("my_datasource", force: true)
+        expect(result).to eq("")
+      end
+    end
+  end
 end

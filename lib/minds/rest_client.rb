@@ -16,8 +16,10 @@ module Minds
       end&.body
     end
 
-    def delete(path:)
-      conn.delete(uri(path: path))&.body
+    def delete(path:, parameters: nil)
+      conn.delete(uri(path: path)) do |req|
+        req.body = parameters.to_json
+      end&.body
     end
 
     private
