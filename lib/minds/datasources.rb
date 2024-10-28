@@ -38,13 +38,12 @@ module Minds
     # @option ds_config [Array<String>] :tables (optional) List of allowed tables
     # @param replace [Boolean] If true, replaces an existing datasource with the same name
     # @return [Datasource] The created datasource object
-    # @raise [ObjectNotFound] If the datasource to be replaced doesn't exist
     def create(ds_config, replace = false)
       name = ds_config.name
       if replace
         begin
           find(name)
-          destroy(name)
+          destroy(name, force: true)
         end
       end
       @client.post(path: "datasources", parameters: ds_config.to_h)
@@ -78,12 +77,13 @@ module Minds
       Datasource.new(**data.transform_keys(&:to_sym))
     end
 
-    # Drop (delete) a datasource by name
+    # Destroy (delete) a datasource by name
     #
     # @param name [String] The name of the datasource to delete
-    # @return [void]
-    def destroy(name)
-      @client.delete(path: "datasources/#{name}")
+    # @param force: if true -remove from all minds, default: false
+    def destroy(name, force: false)
+      data = force ? { cascade: true } : nil
+      @client.delete(path: "datasources/#{name}", parameters: data)
     end
   end
 end

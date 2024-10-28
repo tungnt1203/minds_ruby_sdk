@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: "<BASE_URL>/api/datasources/my_datasource"
+    body:
+      encoding: UTF-8
+      string: '{"cascade":true}'
+    headers:
+      Authorization:
+      - Bearer <API_KEY>
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.12.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 28 Oct 2024 16:40:43 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - route=1730133644.442.2443.667652|9d990cb3ff1a8f5d1dd029aa4ab3886b; Expires=Wed,
+        30-Oct-24 16:40:43 GMT; Max-Age=172800; Path=/; HttpOnly
+      Vary:
+      - Accept-Encoding, Cookie
+      Access-Control-Allow-Origin:
+      - "*"
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=YIMFkgajiOTk7CEVZlo4%2FA9mjz5zIuR02Yl%2FjRZeBGOpFj94k%2BG3K%2FKNIpShKrD5IfAya%2BmEUeHOrCpVXNar0OUqlWGqwPkmtkGYxoSUZKkdy5ETykAmKA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8d9c5e819fc84baa-SIN
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+  recorded_at: Mon, 28 Oct 2024 16:40:43 GMT
+recorded_with: VCR 6.3.1
