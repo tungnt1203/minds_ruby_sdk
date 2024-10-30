@@ -18,6 +18,12 @@ module Minds
       end&.body
     end
 
+    def put(path:, parameters:)
+      conn.put(uri(path: path)) do |req|
+        req.body = parameters.to_json
+      end&.body
+    end
+
     def delete(path:, parameters: nil)
       conn.delete(uri(path: path)) do |req|
         req.body = parameters.to_json
