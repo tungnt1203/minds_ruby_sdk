@@ -2,7 +2,7 @@ module Minds
   class Client
     include Minds::RestClient
 
-    SENSITIVE_ATTRIBUTES = %i[@api_key].freeze
+    SENSITIVE_ATTRIBUTES = %i[@base_url @api_key].freeze
     CONFIG_KEYS = %i[base_url api_key log_errors api_version].freeze
     attr_reader(*CONFIG_KEYS)
 
