@@ -161,8 +161,8 @@ module Minds
     # @param datasources [Array<String, Datasource, DatabaseConfig>, nil] List of datasources used by mind (optional)
     #   Datasource can be passed as:
     #   - String: name of the datasource
-    #   - Datasource object (Minds::Resources::Datasource)
-    #   - DatabaseConfig object (Minds::Resources::DatabaseConfig), in this case datasource will be created
+    #   - Datasource object (Minds::Datasource)
+    #   - DatabaseConfig object (Minds::DatabaseConfig), in this case datasource will be created
     # @param parameters [Hash, nil] Other parameters of the mind (optional)
     # @param replace [Boolean] If true, remove existing mind with the same name (default: false)
     # @return [Mind] The created mind object
