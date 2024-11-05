@@ -34,8 +34,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = [ "lib" ]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "faraday"
-  spec.add_dependency "ruby-openai"
+  spec.add_dependency "faraday", '~> 2.12'
+  spec.add_dependency "ruby-openai", '~> 7.3', '>= 7.3.1'
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
