@@ -12,6 +12,11 @@ require_relative "minds/minds"
 
 module Minds
   class MiddlewareErrors < Faraday::Middleware
+    ##
+    # Handles API error responses and provides detailed logging
+    #
+    # @param env [Hash] The Faraday environment hash
+    # @raise [Faraday::Error] Re-raises the original error after logging
     def call(env)
       @app.call(env)
     rescue Faraday::Error => e
