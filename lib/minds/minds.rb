@@ -7,7 +7,7 @@ module Minds
   DEFAULT_PROMPT_TEMPLATE = "Use your database tools to answer the user's question: {{question}}"
 
   class Mind
-    attr_accessor :name, :model_name, :provider, :parameters, :created_at, :updated_at, :datasources
+    attr_reader :name, :model_name, :provider, :parameters, :created_at, :updated_at, :datasources, :prompt_template
 
     def initialize(client, attributes = {})
       @client = client
@@ -38,14 +38,13 @@ module Minds
     # @return [void]
     def update(name: nil, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil)
       data = {}
-
       ds_names = []
       datasources.each do |ds|
         ds_name = @client.minds.check_datasource(ds)
         ds_names << ds_name
-        data["datasources"] = ds_names
       end if datasources
 
+      data["datasources"] = ds_names
       data["name"] = name if name
       data["model_name"] = model_name if model_name
       data["provider"] = provider if provider
@@ -55,6 +54,16 @@ module Minds
       @client.patch(path: "projects/#{@project}/minds/#{@name}", parameters: data)
 
       @name = name if name && name != @name
+
+      updated_mind = @client.minds.find(@name)
+
+      @model_name = updated_mind.model_name
+      @datasources = updated_mind.datasources
+      @parameters = updated_mind.parameters
+      @prompt_template = updated_mind.prompt_template
+      @provider = updated_mind.provider
+      @created_at = updated_mind.created_at
+      @updated_at = updated_mind.updated_at
     end
 
     ##
