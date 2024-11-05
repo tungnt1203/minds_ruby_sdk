@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Minds
   module Config
     class Base

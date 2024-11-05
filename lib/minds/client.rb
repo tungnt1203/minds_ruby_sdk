@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Minds
   class Client
     include Minds::RestClient

@@ -28,6 +28,8 @@ module Minds
     def initialize(client:)
       @client = client
     end
+
+    ##
     # Create a new datasource and return it
     #
     # @param ds_config [DatabaseConfig] datasource configuration
@@ -38,6 +40,21 @@ module Minds
     # @option ds_config [Array<String>] :tables (optional) List of allowed tables
     # @param replace [Boolean] If true, replaces an existing datasource with the same name
     # @return [Datasource] The created datasource object
+    # @raise [ObjectNotSupported] If datasource type is not supported
+    #
+    # @example
+    #   config = DatabaseConfig.new(
+    #     name: 'sales_db',
+    #     engine: 'postgres',
+    #     connection_data: {
+    #       host: 'localhost',
+    #       port: 5432,
+    #       user_name: "test"
+    #       password: "test"
+    #     }
+    #   )
+    #   datasource = datasources.create(config)
+    #
     def create(ds_config, replace = false)
       name = ds_config.name
       if replace
@@ -50,9 +67,15 @@ module Minds
       find(name)
     end
 
-    # Returns a list of all datasources
+    ##
+    # Return a list of datasources
     #
     # @return [Array<Datasource>] An array of Datasource objects
+    #
+    # @example
+    #   datasources = datasources.all
+    #   datasources.each { |ds| puts ds.name }
+    #
     def all
       data = @client.get(path: "datasources")
       return [] if data.empty?
@@ -64,11 +87,17 @@ module Minds
       end
     end
 
-    # Get a datasource by name
+    ##
+    # Find a datasource by name
     #
     # @param name [String] The name of the datasource to find
     # @return [Datasource] The found datasource object
     # @raise [ObjectNotSupported] If the datasource type is not supported
+    #
+    # @example
+    #   datasource = datasources.find('sales_db')
+    #   puts datasource.engine
+    #
     def find(name)
       data = @client.get(path: "datasources/#{name}")
       if data["engine"].nil?
@@ -77,10 +106,19 @@ module Minds
       Datasource.new(**data.transform_keys(&:to_sym))
     end
 
-    # Destroy (delete) a datasource by name
+    ##
+    # Delete a datasource
     #
-    # @param name [String] The name of the datasource to delete
-    # @param force: if true -remove from all minds, default: false
+    # @param name [String]  Datasource name to delete
+    # @param force [Boolean] Whether to force delete from all minds
+    #
+    # @example
+    #   # Simple delete
+    #   datasources.destroy('old_db')
+    #
+    #   # Force delete
+    #   datasources.destroy('old_db', force: true)
+    #
     def destroy(name, force: false)
       data = force ? { cascade: true } : nil
       @client.delete(path: "datasources/#{name}", parameters: data)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "openai"
 require "uri"
 
@@ -20,7 +22,8 @@ module Minds
       @datasources = attributes["datasources"]
     end
 
-    # Update the mind with new parameters
+    ##
+    # Update mind
     #
     # @param name [String, nil] New name of the mind (optional)
     # @param model_name [String, nil] New LLM model name (optional)
@@ -29,8 +32,8 @@ module Minds
     # @param datasources [Array<String, Datasource, DatabaseConfig>, nil] Alter list of datasources used by mind (optional)
     #   Datasource can be passed as:
     #   - String: name of the datasource
-    #   - Datasource object (Minds::Resources::Datasource)
-    #   - DatabaseConfig object (Minds::Resources::DatabaseConfig), in this case datasource will be created
+    #   - Datasource object (Minds::Datasource)
+    #   - DatabaseConfig object (Minds::DatabaseConfig), in this case datasource will be created
     # @param parameters [Hash, nil] Alter other parameters of the mind (optional)
     # @return [void]
     def update(name: nil, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil)
@@ -54,13 +57,14 @@ module Minds
       @name = name if name && name != @name
     end
 
-    # Add a datasource to the mind
+    ##
+    # Add datasource to mind
     #
-    # @param datasource [String, Datasource, DatabaseConfig] The datasource to add
+    # @param datasource [String, Datasource, DatabaseConfig] Datasource to add
     #   Can be passed as:
     #   - String: name of the datasource
-    #   - Datasource object (Minds::Resources::Datasource)
-    #   - DatabaseConfig object (Minds::Resources::DatabaseConfig), in this case datasource will be created
+    #   - Datasource object (Minds::Datasource)
+    #   - DatabaseConfig object (Minds::DatabaseConfig), in this case datasource will be created
     # @return [void]
     def add_datasources(datasource)
       ds_name = @client.minds.check_datasource(datasource)
@@ -71,13 +75,15 @@ module Minds
       @datasources = mind.datasources
     end
 
-    # Delete a datasource from the mind
+    ##
+    # Remove datasource from mind
     #
-    # @param datasource [String, Datasource] The datasource to delete
+    # @param datasource [String, Datasource] Datasource to remove
     #   Can be passed as:
     #   - String: name of the datasource
     #   - Datasource object (Minds::Resources::Datasource)
     # @return [void]
+    # @raise [ArgumentError] If datasource type is invalid
     def destroy_datasources(datasource)
       if datasource.is_a?(Datasource)
         datasource = datasource.name
@@ -90,6 +96,7 @@ module Minds
       @datasources = mind.datasources
     end
 
+    ##
     # Call mind completion
     #
     # @param message [String] The input question or prompt
@@ -125,9 +132,15 @@ module Minds
       @project = "mindsdb"
     end
 
-    # Returns a list of all minds
+    ##
+    # Lists minds
     #
-    # @return [Array<Mind>] An array of Mind objects
+    # @return [Array<Mind>] List of minds
+    #
+    # @example
+    #   minds = minds.all
+    #   minds.each { |mind| puts mind.name }
+    #
     def all
       data = @client.get(path: "projects/#{@project}/minds")
       return [] if data.empty?
@@ -135,23 +148,35 @@ module Minds
       data.map { |item| Mind.new(@client, item) }
     end
 
-    # Get a mind by name
+    ##
+    # Find a mind by name
     #
     # @param name [String] The name of the mind to find
     # @return [Mind] The found mind object
+    #
+    # @example
+    #   mind = minds.find('sales_assistant')
+    #   puts mind.model_name
+    #
     def find(name)
       data = @client.get(path: "projects/#{@project}/minds/#{name}")
       Mind.new(@client, data)
     end
 
-    # Drop (delete) a mind by name
+    ##
+    # Delete a mind
     #
     # @param name [String] The name of the mind to delete
     # @return [void]
+    #
+    # @example
+    #   minds.destroy('old_assistant')
+    #
     def destroy(name)
       @client.delete(path: "projects/#{@project}/minds/#{name}")
     end
 
+    ##
     # Create a new mind and return it
     #
     # @param name [String] The name of the mind
@@ -166,6 +191,18 @@ module Minds
     # @param parameters [Hash, nil] Other parameters of the mind (optional)
     # @param replace [Boolean] If true, remove existing mind with the same name (default: false)
     # @return [Mind] The created mind object
+    #
+    # @example Simple creation
+    #   mind = minds.create(name: 'sales_assistant', model_name: 'gpt-4')
+    #
+    # @example Creation with datasources
+    #   mind = minds.create(
+    #     name: 'sales_assistant',
+    #     model_name: 'gpt-4',
+    #     datasources: ['sales_db'],
+    #     prompt_template: 'Analyze sales data: {{question}}'
+    #   )
+    #
     def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil, replace: false)
       if replace
         begin
