@@ -29,7 +29,6 @@ module Minds
       @client = client
     end
 
-    ##
     # Create a new datasource and return it
     #
     # @param ds_config [DatabaseConfig] datasource configuration
@@ -67,7 +66,6 @@ module Minds
       find(name)
     end
 
-    ##
     # Return a list of datasources
     #
     # @return [Array<Datasource>] An array of Datasource objects
@@ -87,7 +85,6 @@ module Minds
       end
     end
 
-    ##
     # Find a datasource by name
     #
     # @param name [String] The name of the datasource to find
@@ -106,7 +103,6 @@ module Minds
       Datasource.new(**data.transform_keys(&:to_sym))
     end
 
-    ##
     # Delete a datasource
     #
     # @param name [String]  Datasource name to delete
