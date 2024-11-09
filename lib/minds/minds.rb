@@ -22,7 +22,6 @@ module Minds
       @datasources = attributes["datasources"]
     end
 
-    ##
     # Update mind
     #
     # @param name [String, nil] New name of the mind (optional)
@@ -44,7 +43,7 @@ module Minds
         ds_names << ds_name
       end if datasources
 
-      data["datasources"] = ds_names
+      data["datasources"] = ds_names if !ds_names.empty?
       data["name"] = name if name
       data["model_name"] = model_name if model_name
       data["provider"] = provider if provider
@@ -66,7 +65,6 @@ module Minds
       @updated_at = updated_mind.updated_at
     end
 
-    ##
     # Add datasource to mind
     #
     # @param datasource [String, Datasource, DatabaseConfig] Datasource to add
@@ -84,7 +82,6 @@ module Minds
       @datasources = mind.datasources
     end
 
-    ##
     # Remove datasource from mind
     #
     # @param datasource [String, Datasource] Datasource to remove
@@ -105,7 +102,6 @@ module Minds
       @datasources = mind.datasources
     end
 
-    ##
     # Call mind completion
     #
     # @param message [String] The input question or prompt
@@ -141,7 +137,6 @@ module Minds
       @project = "mindsdb"
     end
 
-    ##
     # Lists minds
     #
     # @return [Array<Mind>] List of minds
@@ -157,7 +152,6 @@ module Minds
       data.map { |item| Mind.new(@client, item) }
     end
 
-    ##
     # Find a mind by name
     #
     # @param name [String] The name of the mind to find
@@ -172,7 +166,6 @@ module Minds
       Mind.new(@client, data)
     end
 
-    ##
     # Delete a mind
     #
     # @param name [String] The name of the mind to delete
@@ -185,7 +178,6 @@ module Minds
       @client.delete(path: "projects/#{@project}/minds/#{name}")
     end
 
-    ##
     # Create a new mind and return it
     #
     # @param name [String] The name of the mind
