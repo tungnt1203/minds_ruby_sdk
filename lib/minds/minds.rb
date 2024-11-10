@@ -80,6 +80,8 @@ module Minds
 
       mind = @client.minds.find(@name)
       @datasources = mind.datasources
+
+      true
     end
 
     # Remove datasource from mind
@@ -191,6 +193,7 @@ module Minds
     #   - DatabaseConfig object (Minds::DatabaseConfig), in this case datasource will be created
     # @param parameters [Hash, nil] Other parameters of the mind (optional)
     # @param replace [Boolean] If true, remove existing mind with the same name (default: false)
+    # @param update [Boolean] If true, to update mind if exists(default: false)
     # @return [Mind] The created mind object
     #
     # @example Simple creation
@@ -204,12 +207,10 @@ module Minds
     #     prompt_template: 'Analyze sales data: {{question}}'
     #   )
     #
-    def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil, replace: false)
+    def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil, replace: false, update: false)
       if replace
-        begin
-          find(name)
-          destroy(name)
-        end
+        find(name)
+        destroy(name)
       end
 
       ds_names = []
@@ -230,7 +231,9 @@ module Minds
         datasources: ds_names
       }
 
-      @client.post(path: "projects/#{@project}/minds", parameters: data)
+      path = "projects/#{@project}/minds"
+      path += "/#{name}" if update
+      @client.send(update ? :put : :post, path: path, parameters: data)
       find(name)
     end
 

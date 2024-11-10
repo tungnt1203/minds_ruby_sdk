@@ -1,6 +1,6 @@
 module Minds
   class DatabaseConfig
-    attr_reader :name, :engine, :description, :connection_data, :tables, :created_at
+    attr_accessor :name, :engine, :description, :connection_data, :tables, :created_at
 
     def initialize(name:, engine:, description:, connection_data: {}, tables: [], created_at: nil)
       @name = name
@@ -57,8 +57,7 @@ module Minds
     def create(ds_config, update = false)
       name = ds_config.name
       if update
-        binding.irb
-        @client.put(path: "datasources/#{name}", parameters: ds_config.to_h.except(:name))
+        @client.put(path: "datasources/#{name}", parameters: ds_config.to_h)
       else
         @client.post(path: "datasources", parameters: ds_config.to_h)
       end
