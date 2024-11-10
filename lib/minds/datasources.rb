@@ -56,11 +56,11 @@ module Minds
     #
     def create(ds_config, update = false)
       name = ds_config.name
-      if update
-        @client.put(path: "datasources/#{name}", parameters: ds_config.to_h)
-      else
-        @client.post(path: "datasources", parameters: ds_config.to_h)
-      end
+
+      path = "datasources"
+      path += "/#{name}" if update
+
+      @client.send(update ? :put : :post, path: path, parameters: ds_config.to_h)
       find(name)
     end
 
