@@ -63,6 +63,7 @@ module Minds
       @provider = updated_mind.provider
       @created_at = updated_mind.created_at
       @updated_at = updated_mind.updated_at
+      true
     end
 
     # Add datasource to mind
@@ -89,7 +90,7 @@ module Minds
     # @param datasource [String, Datasource] Datasource to remove
     #   Can be passed as:
     #   - String: name of the datasource
-    #   - Datasource object (Minds::Resources::Datasource)
+    #   - Datasource object (Minds::Datasource)
     # @return [void]
     # @raise [ArgumentError] If datasource type is invalid
     def destroy_datasources(datasource)
@@ -102,6 +103,7 @@ module Minds
 
       mind = @client.minds.find(@name)
       @datasources = mind.datasources
+      true
     end
 
     # Call mind completion
@@ -258,6 +260,8 @@ module Minds
       return unless ds.is_a?(DatabaseConfig)
 
       @client.datasources.find(ds.name)
+    rescue Faraday::ResourceNotFound
+      @client.datasources.create(ds)
     end
   end
 end
