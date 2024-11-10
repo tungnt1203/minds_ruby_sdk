@@ -1,6 +1,6 @@
 module Minds
   class DatabaseConfig
-    attr_reader :name, :engine, :description, :connection_data, :tables, :created_at
+    attr_accessor :name, :engine, :description, :connection_data, :tables, :created_at
 
     def initialize(name:, engine:, description:, connection_data: {}, tables: [], created_at: nil)
       @name = name
@@ -37,7 +37,7 @@ module Minds
     # @option ds_config [String] :description Description of the database. Used by mind to understand what data can be retrieved from it.
     # @option ds_config [Hash] :connection_data (optional) Credentials to connect to the database
     # @option ds_config [Array<String>] :tables (optional) List of allowed tables
-    # @param replace [Boolean] If true, replaces an existing datasource with the same name
+    # @param update [Boolean] If true, to update datasourse if exists, default is false
     # @return [Datasource] The created datasource object
     # @raise [ObjectNotSupported] If datasource type is not supported
     #
@@ -54,15 +54,13 @@ module Minds
     #   )
     #   datasource = datasources.create(config)
     #
-    def create(ds_config, replace = false)
+    def create(ds_config, update = false)
       name = ds_config.name
-      if replace
-        begin
-          find(name)
-          destroy(name, force: true)
-        end
-      end
-      @client.post(path: "datasources", parameters: ds_config.to_h)
+
+      path = "datasources"
+      path += "/#{name}" if update
+
+      @client.send(update ? :put : :post, path: path, parameters: ds_config.to_h)
       find(name)
     end
 
