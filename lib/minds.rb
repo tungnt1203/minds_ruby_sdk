@@ -30,10 +30,10 @@ module Minds
         error_suffix = "\033[0m"
 
         formatted_message = msg.split("\n").map do |line|
-          "#{' ' * 15}#{line}"
+          "#{' ' * 14}#{line}"
         end.join("\n")
 
-        "#{error_prefix} Rest Client Error\n#{formatted_message}#{error_suffix}\n"
+        "#{error_prefix} Minds Client Error\n#{formatted_message}#{error_suffix}\n"
       end
 
       logger.error(e.response[:body])
