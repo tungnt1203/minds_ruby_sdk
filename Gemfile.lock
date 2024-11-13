@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minds_sdk (1.0.0)
+    minds_sdk (1.0.1)
       faraday (~> 2.12)
       ruby-openai (~> 7.3, >= 7.3.1)
 

@@ -6,13 +6,15 @@ module Minds
 
     SENSITIVE_ATTRIBUTES = %i[@base_url @api_key].freeze
     CONFIG_KEYS = %i[base_url api_key log_errors api_version].freeze
-    attr_reader(*CONFIG_KEYS)
+    attr_reader(*CONFIG_KEYS, :faraday_middleware)
 
-    def initialize(options = {})
+    def initialize(options = {}, &faraday_middleware)
       # if key not present. Fall back to global config
       CONFIG_KEYS.each do |key|
         instance_variable_set "@#{key}", options[key] || Client.config.send(key)
       end
+
+      @faraday_middleware = faraday_middleware
     end
 
     class << self
