@@ -27,6 +27,12 @@ module Minds
           raise MindNameInvalid, "Mind name '#{name}' is invalid. It must start with a letter, contain only letters, numbers, or underscores, and be 32 characters or less."
         end
       end
+
+      def validate_datasource_name!(name)
+        unless name.match?(/\A[a-zA-Z][a-zA-Z0-9_]{0,61}\z/)
+          raise DatasourceNameInvalid, "Datasource name '#{name}' is invalid. It must start with a letter, contain only letters, numbers, or underscores, and be 62 characters or less."
+        end
+      end
     end
   end
 end
