@@ -9,6 +9,7 @@ require_relative "minds/errors"
 require_relative "minds/config/base"
 require_relative "minds/datasources"
 require_relative "minds/minds"
+require_relative "minds/validators"
 
 module Minds
   class MiddlewareErrors < Faraday::Middleware

@@ -36,6 +36,7 @@ module Minds
     # @param parameters [Hash, nil] Alter other parameters of the mind (optional)
     # @return [void]
     def update(name: nil, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil)
+      Validators.validate_mind_name!(name) if !name.nil?
       data = {}
       ds_names = []
       datasources.each do |ds|
@@ -210,6 +211,8 @@ module Minds
     #   )
     #
     def create(name:, model_name: nil, provider: nil, prompt_template: nil, datasources: nil, parameters: nil, replace: false, update: false)
+      Validators.validate_mind_name!(name) if !name.nil?
+
       if replace
         find(name)
         destroy(name)
