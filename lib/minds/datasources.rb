@@ -57,6 +57,8 @@ module Minds
     def create(ds_config, update = false)
       name = ds_config.name
 
+      Validators.validate_datasource_name!(name)
+
       path = "datasources"
       path += "/#{name}" if update
 
