@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in minds.gemspec
+# Specify your gem's dependencies in minds_sdk.gemspec
 gemspec
 
 gem "faraday", "~> 2.12"

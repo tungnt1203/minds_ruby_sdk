@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+VERSION=$1
+
+if [ -z "$VERSION" ]; then
+  echo "Usage: $0 <version>"
+  exit 1
+fi
+
+printf "# frozen_string_literal: true\n\n module Minds\n  VERSION = \"$VERSION\"\nend\n" > ./lib/minds/version.rb
+bundle
+git add Gemfile.lock lib/minds/version.rb
+git commit -m "Bump version for $VERSION"
+git push
+git tag v$VERSION
+git push --tags
+gem build minds_sdk.gemspec
+gem push "minds_sdk-$VERSION.gem" --host https://rubygems.org
+rm "minds_sdk-$VERSION.gem"
