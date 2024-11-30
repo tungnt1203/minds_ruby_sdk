@@ -7,7 +7,7 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-printf "# frozen_string_literal: true\n\n module Minds\n  VERSION = \"$VERSION\"\nend\n" > ./lib/minds/version.rb
+printf "# frozen_string_literal: true\n\nmodule Minds\n  VERSION = \"$VERSION\"\nend\n" > ./lib/minds/version.rb
 bundle
 git add Gemfile.lock lib/minds/version.rb
 git commit -m "Bump version for $VERSION"
