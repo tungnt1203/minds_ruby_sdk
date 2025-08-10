@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "uri"
+
 module Minds
   module RestClient
     def get(path:)
@@ -26,14 +28,15 @@ module Minds
 
     def delete(path:, parameters: nil)
       conn.delete(uri(path: path)) do |req|
-        req.body = parameters.to_json
+        req.body = parameters.to_json unless parameters.nil?
       end&.body
     end
 
     private
 
     def uri(path:)
-      return path if @base_url.include?(@api_version)
+      base_path = URI(@base_url).path
+      return path if base_path.split("/").include?(@api_version)
 
       "/#{@api_version}/#{path}"
     end
