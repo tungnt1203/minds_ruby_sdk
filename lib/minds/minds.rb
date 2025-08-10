@@ -5,7 +5,7 @@ require "uri"
 
 module Minds
   DEFAULT_PROMPT_TEMPLATE = "Use your database tools to answer the user's question: {{question}}"
-
+  DEFAULT_MODEL = "gpt-4o"
   class Mind
     attr_reader :name, :model_name, :provider, :parameters, :created_at, :updated_at, :datasources, :prompt_template
 
@@ -230,7 +230,7 @@ module Minds
       parameters["prompt_template"] ||= DEFAULT_PROMPT_TEMPLATE
       data = {
         name: name,
-        model_name: model_name,
+        model_name: model_name || DEFAULT_MODEL,
         provider: provider,
         parameters: parameters,
         datasources: ds_names

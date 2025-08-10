@@ -11,3 +11,5 @@
 .rspec_status
 .tool-versions
 .env
+
+.idea/
