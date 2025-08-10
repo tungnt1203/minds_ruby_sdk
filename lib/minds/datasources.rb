@@ -37,7 +37,7 @@ module Minds
     # @option ds_config [String] :description Description of the database. Used by mind to understand what data can be retrieved from it.
     # @option ds_config [Hash] :connection_data (optional) Credentials to connect to the database
     # @option ds_config [Array<String>] :tables (optional) List of allowed tables
-    # @param update [Boolean] If true, to update datasourse if exists, default is false
+    # @param update [Boolean] If true, to update datasource if exists, default is false
     # @return [Datasource] The created datasource object
     # @raise [ObjectNotSupported] If datasource type is not supported
     #
